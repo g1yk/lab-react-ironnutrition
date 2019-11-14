@@ -3,3 +3,24 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+
+
+
+form {
+  margin: 20px;
+
+}
+
+input {
+  padding: 10px;
+  font-size: 24px;
+}
+
+
+button {
+  margin: 200px;
+  width: 10vw;
+  height: 3vh;
+
+}
