@@ -4,7 +4,10 @@ body {
   font-family: sans-serif;
 }
 
-
+.App {
+  text-align: center;
+  width: 50%;
+}
 
 
 form {
@@ -22,5 +25,13 @@ button {
   margin: 200px;
   width: 10vw;
   height: 3vh;
+
+}
+
+
+.todaysFood {
+position: absolute;
+right: 250px;
+top: 50px;
 
 }

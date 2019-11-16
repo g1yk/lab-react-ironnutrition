@@ -12,16 +12,57 @@ class App extends Component {
     foodToAdd: '',
     caloriesToAdd: 0,
     showForm: false,
-    search: ''
-    // searchFoods: []
+    search: '',
+    listOfFoods: {
+      // "Pizza " : {
+      //   quantity: 5,
+      //   calories: 500
+      // },
+      // 'Salad ' : {
+      //   quantity: 3,
+      //   calories: 200
+      // },
+      // 'Kiwi ' : {
+      //   quantity: 1,
+      //   calories: 99
+      // },
+
+
+    }
   }
+
+  showTodaysFood = () => {
+
+    let foods = this.state.listOfFoods
+    let array = [];
+    for (let key in foods) {
+      array.push(
+        <li key={key} >
+          name:     {key}
+          calories: {Number(foods[key].quantity) * Number(foods[key].calories)} </li>
+      )
+    }
+    return (
+      <ul> {array} </ul>
+    )
+  }
+
 
 
   showFoods = (index) => {
     return this.state.foods.map((eachFood, i) => {
-      return < FoodBox key={i} {...eachFood} />
+      return < FoodBox updateFoodList={this.updateFoodList} changeTheQuantity={this.changeTheQuantity} key={i} {...eachFood} />
     })
   }
+
+
+
+  updateFoodList = (foodBox, calories) => {
+    console.log(foodBox, calories)
+    let newListOfFoods = [... this.state.listOfFoods]
+    newListOfFoods.foodBoxState[name] = foodBoxState;
+  }
+
 
   addFood = (e) => {
     e.preventDefault()
@@ -56,23 +97,23 @@ class App extends Component {
   }
 
   setFormToTrue = () => {
-    this.setState ({
+    this.setState({
       showForm: !this.state.showForm,
     })
   }
 
   setSearch = (e) => {
     this.setState({
-      'search': e.target.value 
+      'search': e.target.value
     })
-   let filterFoods = [... foodsJson].filter(eachFood => {
-     return eachFood.name.toLowerCase().includes(e.target.value.toLowerCase())
-   })
+    let filterFoods = [...foodsJson].filter(eachFood => {
+      return eachFood.name.toLowerCase().includes(e.target.value.toLowerCase())
+    })
 
-   this.setState({
-     'search': e.target.value,
-     foods: filterFoods
-   })
+    this.setState({
+      'search': e.target.value,
+      foods: filterFoods
+    })
   }
 
   showTheForm = () => {
@@ -85,24 +126,36 @@ class App extends Component {
           <input name='submit' type='submit' value='Add Food' />
         </form>
 
-        : <button  onClick={this.setFormToTrue}>Show Form</button>
+        : <button onClick={this.setFormToTrue}>Show Form</button>
     )
   }
+
 
   render() {
 
     return (
-      <div className='App'>
 
-        <h1>{Math.random()}</h1>
+      <React.Fragment>
+        <div className='App'>
+
+          <h1>{Math.random()}</h1>
 
 
-<input type='text' name='search' placeholder='Search for food' onChange={this.setSearch} />
+          <input type='text' name='search' placeholder='Search for food' onChange={this.setSearch} />
 
-        {this.showTheForm()}
-        {this.showFoods()}
+          {this.showTheForm()}
+          {this.showFoods()}
 
-      </div>
+        </div>
+
+
+        <div className='todaysFood' >
+          Todays Food
+        {this.showTodaysFood()}
+
+
+        </div>
+      </React.Fragment>
     );
   }
 }
